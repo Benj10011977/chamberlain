@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Benjamin Chamberlain — BTS SISR · Admin Réseau · Saint-Nazaire</title>
+  <meta name="description" content="Portfolio de Benjamin Chamberlain, 49 ans — Étudiant BTS SISR en alternance à Aristide Briand, Saint-Nazaire." />
+  <meta name="keywords" content="Benjamin Chamberlain, BTS SISR, administrateur réseau, Saint-Nazaire, Linux, Windows, Active Directory" />
+  <meta name="author" content="Benjamin Chamberlain" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #050810;
+      --bg2:    #0d1117;
+      --bg3:    #161b22;
+      --vert:   #00ff88;
+      --bleu:   #00aaff;
+      --orange: #ff8800;
+      --texte:  #e6edf3;
+      --gris:   #7d8590;
+      --bord:   #21262d;
+      --nav-h:  64px;
+      --mono:   'Space Mono', monospace;
+      --sans:   'Syne', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--texte); font-family: var(--sans); line-height: 1.7; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,255,136,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,.025) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    a { color: var(--vert); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--bleu); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      background: rgba(5,8,16,.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--bord);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; z-index: 1000;
+    }
+    .logo { font-family: var(--mono); font-size: .88rem; color: var(--vert); }
+    .logo span { color: var(--gris); }
+    .cligno { display: inline-block; width: 8px; height: 13px; background: var(--vert); margin-left: 2px; vertical-align: middle; animation: cligno 1s step-end infinite; }
+    @keyframes cligno { 50% { opacity: 0; } }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a { color: var(--gris); font-family: var(--mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; transition: color .2s; padding: .3rem 0; border-bottom: 2px solid transparent; text-decoration: none; cursor: pointer; }
+    nav ul a:hover, nav ul a.actif { color: var(--vert); border-bottom-color: var(--vert); }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .burger span { width: 22px; height: 2px; background: var(--texte); border-radius: 2px; }
+
+    .page { display: none; min-height: 100vh; padding-top: var(--nav-h); position: relative; z-index: 1; animation: app .4s ease; }
+    .page.actif { display: block; }
+    @keyframes app { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+    .wrap { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+    h1 { font-family: var(--sans); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: var(--texte); margin-bottom: .3rem; }
+    h1 em { font-style: normal; color: var(--vert); }
+    .sous { color: var(--gris); font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; margin-bottom: 2rem; }
+    h2 { font-size: 1rem; font-weight: 700; color: var(--vert); font-family: var(--mono); letter-spacing: .1em; text-transform: uppercase; margin: 2.5rem 0 1rem; }
+    p { color: var(--gris); line-height: 1.8; margin-bottom: 1rem; font-size: .92rem; }
+    p strong { color: var(--texte); }
+
+    .carte { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; padding: 1.4rem; margin-bottom: 1rem; transition: border-color .2s; }
+    .carte:hover { border-color: rgba(0,255,136,.3); }
+    .carte h3 { font-size: 1rem; font-weight: 700; color: var(--texte); margin-bottom: .25rem; }
+    .carte .dates { font-family: var(--mono); font-size: .72rem; color: var(--vert); margin-bottom: .6rem; }
+    .carte p { margin: 0; }
+    .carte ul { list-style: none; padding: 0; margin-top: .5rem; }
+    .carte ul li { font-size: .87rem; color: var(--gris); padding-left: 1.2rem; position: relative; margin-bottom: .25rem; }
+    .carte ul li::before { content: '//'; position: absolute; left: 0; color: var(--vert); font-family: var(--mono); font-size: .62rem; top: .25rem; }
+
+    .g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1rem; }
+    .bloc { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; padding: 1.3rem; text-align: center; transition: all .2s; }
+    .bloc:hover { border-color: var(--vert); transform: translateY(-3px); }
+    .bloc .icone { font-size: 2rem; margin-bottom: .5rem; }
+    .bloc h3 { font-size: .88rem; font-weight: 700; color: var(--texte); margin-bottom: .3rem; }
+    .bloc p { font-size: .8rem; color: var(--gris); margin: 0; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+    .tag { background: rgba(0,255,136,.07); border: 1px solid rgba(0,255,136,.2); color: var(--vert); border-radius: 4px; padding: .18rem .6rem; font-family: var(--mono); font-size: .68rem; }
+    .tag-bleu { background: rgba(0,170,255,.07); border-color: rgba(0,170,255,.2); color: var(--bleu); }
+    .tag-orange { background: rgba(255,136,0,.07); border-color: rgba(255,136,0,.2); color: var(--orange); }
+
+    .stats { display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--bord); flex-wrap: wrap; }
+    .stat-n { font-family: var(--mono); font-size: 2rem; font-weight: 700; color: var(--vert); line-height: 1; }
+    .stat-l { font-size: .72rem; color: var(--gris); letter-spacing: .07em; text-transform: uppercase; margin-top: .2rem; }
+
+    .btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .btn { display: inline-block; padding: .65rem 1.5rem; border-radius: 6px; font-family: var(--mono); font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; transition: all .2s; border: none; }
+    .btn-p { background: var(--vert); color: #050810; font-weight: 700; }
+    .btn-p:hover { background: #00ffaa; color: #050810; transform: translateY(-2px); }
+    .btn-g { background: transparent; color: var(--vert); border: 1px solid rgba(0,255,136,.35); }
+    .btn-g:hover { background: rgba(0,255,136,.08); border-color: var(--vert); color: var(--vert); transform: translateY(-2px); }
+
+    .info-contact { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; padding: 1.5rem; }
+    .ligne-contact { display: flex; align-items: center; gap: .8rem; margin-bottom: .7rem; font-size: .9rem; }
+    .ico-c { width: 32px; height: 32px; background: var(--bg3); border: 1px solid var(--bord); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    .lien-ext { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 1rem; margin-bottom: .8rem; color: var(--texte); transition: all .2s; text-decoration: none; }
+    .lien-ext:hover { border-color: var(--vert); transform: translateX(4px); color: var(--texte); }
+    .lien-ext .icone { font-size: 1.4rem; }
+    .lien-ext strong { display: block; font-size: .88rem; color: var(--texte); }
+    .lien-ext span { font-family: var(--mono); font-size: .72rem; color: var(--gris); }
+    .lien-ext .fl { margin-left: auto; color: var(--vert); font-family: var(--mono); }
+
+    .form { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; padding: 1.5rem; margin-top: 1.5rem; }
+    .form label { display: block; font-family: var(--mono); font-size: .68rem; color: var(--gris); letter-spacing: .08em; margin-bottom: .25rem; margin-top: .8rem; }
+    .form input, .form textarea { width: 100%; padding: .65rem .9rem; background: var(--bg3); border: 1px solid var(--bord); border-radius: 6px; color: var(--texte); font-family: var(--sans); font-size: .88rem; outline: none; transition: border-color .2s; resize: vertical; }
+    .form input:focus, .form textarea:focus { border-color: var(--vert); }
+    .form input::placeholder, .form textarea::placeholder { color: var(--gris); }
+    .form button { margin-top: 1rem; width: 100%; background: var(--vert); color: #050810; border: none; border-radius: 6px; padding: .8rem; font-size: .85rem; font-weight: 700; font-family: var(--mono); cursor: pointer; letter-spacing: .06em; transition: background .2s; }
+    .form button:hover { background: #00ffaa; }
+
+    .note-h { background: rgba(255,136,0,.07); border: 1px solid rgba(255,136,0,.2); border-radius: 8px; padding: 1rem 1.2rem; font-size: .84rem; color: var(--gris); margin-top: 2rem; display: flex; gap: .8rem; }
+    .note-h span { color: var(--orange); font-size: 1.2rem; flex-shrink: 0; }
+
+    .tl { position: relative; padding-left: 2rem; }
+    .tl::before { content: ''; position: absolute; left: 7px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--vert), transparent); }
+    .tl-item { position: relative; margin-bottom: 1.6rem; }
+    .tl-item::before { content: ''; position: absolute; left: -1.7rem; top: .45rem; width: 10px; height: 10px; border-radius: 50%; background: var(--vert); border: 2px solid var(--bg); box-shadow: 0 0 8px var(--vert); }
+    .tl-annee { font-family: var(--mono); font-size: .68rem; color: var(--vert); margin-bottom: .15rem; }
+    .tl-titre { font-size: .92rem; font-weight: 700; color: var(--texte); }
+    .tl-lieu { font-size: .8rem; color: var(--gris); }
+
+    footer { background: var(--bg2); border-top: 1px solid var(--bord); padding: 1.2rem 2rem; text-align: center; font-family: var(--mono); font-size: .68rem; color: var(--gris); position: relative; z-index: 1; }
+    footer em { color: var(--vert); font-style: normal; }
+
+    @media (max-width: 700px) {
+      .g3 { grid-template-columns: 1fr; }
+      nav ul { gap: .6rem; }
+      nav ul a { font-size: .65rem; }
+      .stats { gap: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      nav ul { display: none; flex-direction: column; position: absolute; top: var(--nav-h); left: 0; right: 0; background: var(--bg2); padding: 1.5rem; border-bottom: 1px solid var(--bord); gap: 1rem; }
+      nav ul.ouvert { display: flex; }
+      .burger { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">benj<span>@sisr</span>:~$<span class="cligno"></span></div>
+  <ul id="menu">
+    <li><a onclick="aller('accueil')"    id="nav-accueil"    class="actif">Accueil</a></li>
+    <li><a onclick="aller('experience')" id="nav-experience"             >Expérience</a></li>
+    <li><a onclick="aller('parcours')"   id="nav-parcours"               >Parcours</a></li>
+    <li><a onclick="aller('loisirs')"    id="nav-loisirs"                >Loisirs</a></li>
+    <li><a onclick="aller('contact')"    id="nav-contact"                >Contact</a></li>
+  </ul>
+  <button class="burger" onclick="document.getElementById('menu').classList.toggle('ouvert')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE 1 — ACCUEIL -->
+<section class="page actif" id="page-accueil">
+  <div class="wrap">
+    <h1>Bonjour, je suis<br /><em>Benjamin Chamberlain</em></h1>
+    <p class="sous">49 ans · BTS SISR en alternance · Lycée Aristide Briand · Saint-Nazaire</p>
+
+    <p>Passionné par l'informatique et les réseaux depuis toujours, je suis aujourd'hui en reconversion pour devenir <strong>administrateur réseau</strong>. C'est ma 7e reconversion — et la plus motivante !</p>
+    <p>Avant ça : pâtissier, buraliste, technicien chez IBM, infographiste, patron d'une boutique Leonidas à Saint-Nazaire, et homme à tout faire pendant 6 ans. Chaque métier m'a rendu plus polyvalent et plus solide.</p>
+
+    <div class="btns">
+      <button class="btn btn-p" onclick="aller('experience')">Mon parcours</button>
+      <button class="btn btn-g" onclick="aller('contact')">Me contacter</button>
+    </div>
+
+    <div class="stats">
+      <div><div class="stat-n">49</div><div class="stat-l">Ans</div></div>
+      <div><div class="stat-n">7×</div><div class="stat-l">Reconversions</div></div>
+      <div><div class="stat-n">BTS</div><div class="stat-l">SISR en cours</div></div>
+      <div><div class="stat-n">2</div><div class="stat-l">BTS obtenus</div></div>
+    </div>
+
+    <h2>Ce que je maîtrise</h2>
+    <div class="g3">
+      <div class="bloc"><div class="icone">🌐</div><h3>Réseaux</h3><p>Switch, routeurs, VLAN, configuration réseau</p></div>
+      <div class="bloc"><div class="icone">🖥️</div><h3>Systèmes</h3><p>Linux, Windows Server, macOS, iOS</p></div>
+      <div class="bloc"><div class="icone">🎨</div><h3>Infographie</h3><p>Photoshop, Illustrator, InDesign, QuarkXPress</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2 — EXPÉRIENCE -->
+<section class="page" id="page-experience">
+  <div class="wrap">
+    <h1>Mes <em>expériences</em></h1>
+    <p class="sous">7 métiers différents, autant de leçons de vie</p>
+
+    <div class="carte">
+      <h3>🎓 Étudiant BTS SISR — Alternance</h3>
+      <div class="dates">En cours · Lycée Aristide Briand, Saint-Nazaire</div>
+      <p>Formation en administration réseau et systèmes d'infrastructure.</p>
+      <ul>
+        <li>Configuration et administration de switchs et routeurs</li>
+        <li>Administration Windows Server et Active Directory</li>
+        <li>Administration Linux — bases solides</li>
+        <li>Environnements macOS et iOS</li>
+        <li>Mise en place et documentation d'infrastructures réseau</li>
+      </ul>
+      <div class="tags">
+        <span class="tag">Linux</span>
+        <span class="tag">Windows Server</span>
+        <span class="tag">Active Directory</span>
+        <span class="tag">Switch</span>
+        <span class="tag tag-bleu">macOS</span>
+        <span class="tag tag-bleu">iOS</span>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h3>🎨 Infographiste / Graphiste</h3>
+      <div class="dates">BTS Infographie obtenu</div>
+      <p>Création graphique, mise en page et production pour l'impression.</p>
+      <div class="tags">
+        <span class="tag tag-orange">Photoshop</span>
+        <span class="tag tag-orange">Illustrator</span>
+        <span class="tag tag-orange">InDesign</span>
+        <span class="tag tag-orange">QuarkXPress</span>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h3>🔨 Homme à tout faire</h3>
+      <div class="dates">6 ans</div>
+      <p>Travaux divers, dépannage, bâtiment, services à la personne. Autonomie totale dans des contextes très variés.</p>
+    </div>
+
+    <div class="carte">
+      <h3>🍫 Patron — Boutique Leonidas Chocolats</h3>
+      <div class="dates">Période dédiée · Saint-Nazaire</div>
+      <p>Gérant d'une boutique de chocolats belges en franchise. Gestion commerciale, management, stocks et relation client.</p>
+      <div class="tags"><a href="https://www.leonidas.com/fr_fr/boutiques/saint-nazaire/leonidas" target="_blank" class="tag tag-orange">🍫 leonidas.com →</a></div>
+    </div>
+
+    <div class="carte">
+      <h3>💻 Technicien Maintenance Hardware N2 — IBM</h3>
+      <div class="dates">Période dédiée</div>
+      <p>Diagnostic et réparation de matériel informatique professionnel sur site. Respect des procédures qualité IBM.</p>
+      <div class="tags">
+        <span class="tag">Hardware</span>
+        <span class="tag">Maintenance N2</span>
+        <span class="tag tag-bleu">IBM</span>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h3>🗞️ Buraliste</h3>
+      <div class="dates">Période dédiée</div>
+      <p>Gestion d'un bureau de tabac/presse. Caisse, stocks, relation client quotidienne.</p>
+    </div>
+
+    <div class="carte">
+      <h3>🍰 Pâtissier</h3>
+      <div class="dates">Début de carrière</div>
+      <p>Artisanat alimentaire. Rigueur, précision et travail en équipe.</p>
+    </div>
+
+    <h2>Compétences techniques</h2>
+    <div class="tags">
+      <span class="tag">Linux</span>
+      <span class="tag">Windows Server</span>
+      <span class="tag tag-bleu">macOS / iOS</span>
+      <span class="tag">Active Directory</span>
+      <span class="tag">Configuration Switch</span>
+      <span class="tag">Réseaux IP</span>
+      <span class="tag">Maintenance Hardware</span>
+      <span class="tag tag-orange">Photoshop</span>
+      <span class="tag tag-orange">Illustrator</span>
+      <span class="tag tag-orange">InDesign</span>
+      <span class="tag tag-orange">QuarkXPress</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3 — PARCOURS -->
+<section class="page" id="page-parcours">
+  <div class="wrap">
+    <h1>Mon <em>parcours</em></h1>
+    <p class="sous">Formations et reconversions</p>
+
+    <h2>Formations et diplômes</h2>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-annee">En cours</div>
+        <div class="tl-titre">BTS SISR — Administration Réseau</div>
+        <div class="tl-lieu">Lycée Aristide Briand · Saint-Nazaire · Alternance</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-annee">Obtenu</div>
+        <div class="tl-titre">BTS Infographie (Bac +2)</div>
+        <div class="tl-lieu">Photoshop, Illustrator, InDesign, QuarkXPress</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-annee">Obtenu</div>
+        <div class="tl-titre">Formation IBM — Technicien Maintenance N2</div>
+        <div class="tl-lieu">Certification interne IBM</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-annee">Début</div>
+        <div class="tl-titre">CAP / BEP Pâtisserie</div>
+        <div class="tl-lieu">Formation initiale en artisanat alimentaire</div>
+      </div>
+    </div>
+
+    <h2>Les 7 reconversions</h2>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-annee">Aujourd'hui</div><div class="tl-titre">🖥️ Admin Réseau — BTS SISR</div><div class="tl-lieu">La passion devenue futur métier</div></div>
+      <div class="tl-item"><div class="tl-annee">6 ans</div><div class="tl-titre">🔨 Homme à tout faire</div><div class="tl-lieu">Polyvalence et autonomie totales</div></div>
+      <div class="tl-item"><div class="tl-annee">Précédent</div><div class="tl-titre">🍫 Patron Leonidas</div><div class="tl-lieu">Saint-Nazaire</div></div>
+      <div class="tl-item"><div class="tl-annee">Précédent</div><div class="tl-titre">💻 Technicien IBM</div><div class="tl-lieu">Maintenance hardware N2</div></div>
+      <div class="tl-item"><div class="tl-annee">Précédent</div><div class="tl-titre">🗞️ Buraliste</div><div class="tl-lieu">Commerce de proximité</div></div>
+      <div class="tl-item"><div class="tl-annee">Précédent</div><div class="tl-titre">🎨 Infographiste</div><div class="tl-lieu">BTS Infographie — PAO et création graphique</div></div>
+      <div class="tl-item"><div class="tl-annee">Début</div><div class="tl-titre">🍰 Pâtissier</div><div class="tl-lieu">Artisanat alimentaire</div></div>
+    </div>
+
+    <div class="note-h">
+      <span>♿</span>
+      <div>
+        <strong style="color:var(--texte)">Travailleur en situation de handicap</strong><br />
+        Arthrose à la hanche et suivi psychologique suite à un burn-out (il y a 3 ans et demi).
+        Ces épreuves font partie de mon histoire — elles ont renforcé ma résilience et ma détermination.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 — LOISIRS -->
+<section class="page" id="page-loisirs">
+  <div class="wrap">
+    <h1>Mes <em>loisirs</em></h1>
+    <p class="sous">Ce qui me ressource en dehors du travail</p>
+
+    <div class="g3">
+      <div class="bloc"><div class="icone">🥋</div><h3>Arts Martiaux</h3><p>Pratiqué pendant de nombreuses années. Arrêté suite à l'arthrose à la hanche.</p></div>
+      <div class="bloc"><div class="icone">🎺</div><h3>Trompette</h3><p>Puissance et précision. Un de mes instruments de prédilection.</p></div>
+      <div class="bloc"><div class="icone">🎸</div><h3>Guitare</h3><p>Pour les moments calmes et la détente musicale.</p></div>
+      <div class="bloc"><div class="icone">🎷</div><h3>Saxophone</h3><p>Jazz, blues... un instrument très expressif.</p></div>
+      <div class="bloc"><div class="icone">🎵</div><h3>Clarinette</h3><p>4e instrument pratiqué. La musique est une passion constante.</p></div>
+      <div class="bloc"><div class="icone">💻</div><h3>Informatique</h3><p>Ma passion depuis toujours, bientôt mon métier !</p></div>
+    </div>
+
+    <div style="margin-top:2.5rem;padding:1.5rem;background:var(--bg2);border-left:3px solid var(--vert);border-radius:0 8px 8px 0">
+      <p style="font-family:var(--mono);font-size:.82rem;color:var(--gris);line-height:1.9;margin:0">
+        <span style="color:var(--vert)">// note :</span><br />
+        "Musicien de 4 instruments, ancien pratiquant d'arts martiaux, technicien IBM, chocolatier, patissier...
+        La curiosite n'a pas d'age. A 49 ans, je recommence pour la 7e fois - et c'est la meilleure decision de ma vie."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5 — CONTACT -->
+<section class="page" id="page-contact">
+  <div class="wrap">
+    <h1>Me <em>contacter</em></h1>
+    <p class="sous">Une question, une opportunite ? Ecrivez-moi !</p>
+
+    <div class="info-contact">
+      <div class="ligne-contact">
+        <div class="ico-c">📧</div>
+        <a href="mailto:benjamin.chamberlain@sfr.fr">benjamin.chamberlain@sfr.fr</a>
+      </div>
+      <div class="ligne-contact">
+        <div class="ico-c">📱</div>
+        <a href="tel:+33623331860">06 23 33 18 60</a>
+      </div>
+      <div class="ligne-contact">
+        <div class="ico-c">📍</div>
+        <span style="color:var(--gris)">Saint-Nazaire (44)</span>
+      </div>
+      <div class="ligne-contact">
+        <div class="ico-c">🎓</div>
+        <span style="color:var(--gris)">Alternance BTS SISR - Lycee Aristide Briand</span>
+      </div>
+    </div>
+
+    <h2>En ligne</h2>
+    <a href="https://benj10011977.github.io/chamberlain/" target="_blank" class="lien-ext">
+      <span class="icone">🐙</span>
+      <div><strong>GitHub</strong><span>github.com/Benj10011977/chamberlain</span></div>
+      <span class="fl">→</span>
+    </a>
+    <a href="https://linkedin.com/in/benjamin-chamberlain-8a6b13331" target="_blank" class="lien-ext">
+      <span class="icone">💼</span>
+      <div><strong>LinkedIn</strong><span>linkedin.com/in/benjamin-chamberlain-8a6b13331</span></div>
+      <span class="fl">→</span>
+    </a>
+    <a href="https://www.leonidas.com/fr_fr/boutiques/saint-nazaire/leonidas" target="_blank" class="lien-ext">
+      <span class="icone">🍫</span>
+      <div><strong>Leonidas</strong><span>Boutique - Saint-Nazaire</span></div>
+      <span class="fl">→</span>
+    </a>
+
+    <div class="form">
+      <h2 style="border:none;padding:0;margin-top:0;margin-bottom:.5rem">Envoyer un message</h2>
+      <label>Votre nom</label>
+      <input type="text" placeholder="Prenom Nom" />
+      <label>Votre email</label>
+      <input type="email" placeholder="email@exemple.com" />
+      <label>Votre message</label>
+      <textarea rows="5" placeholder="Ecrivez votre message ici..."></textarea>
+      <button onclick="alert('Pour activer ce formulaire, creez un compte gratuit sur formspree.io')">Envoyer</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 — <em>Benjamin Chamberlain</em> · BTS SISR · Saint-Nazaire · benjamin.chamberlain@sfr.fr</p>
+</footer>
+
+<script>
+  function aller(id) {
+    document.querySelectorAll('.page').forEach(function(p) {
+      p.classList.remove('actif');
+    });
+    document.querySelectorAll('nav ul a').forEach(function(a) {
+      a.classList.remove('actif');
+    });
+    document.getElementById('page-' + id).classList.add('actif');
+    document.getElementById('nav-' + id).classList.add('actif');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('menu').classList.remove('ouvert');
+  }
+</script>
+
+</body>
+</html>
