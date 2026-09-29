@@ -126,6 +126,15 @@
     .tl-titre { font-size: .92rem; font-weight: 700; color: var(--texte); }
     .tl-lieu { font-size: .8rem; color: var(--gris); }
 
+    /* Réalisations : photo et documents */
+    .photo { background: var(--bg2); border: 1px solid var(--bord); border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+    .photo img { display: block; width: 100%; max-height: 520px; object-fit: cover; }
+    .photo figcaption { padding: .8rem 1.2rem; font-family: var(--mono); font-size: .72rem; color: var(--gris); }
+    .photo figcaption strong { color: var(--vert); font-weight: 400; }
+    .doc-liens { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+    .doc-liens a { font-family: var(--mono); font-size: .68rem; padding: .25rem .7rem; border-radius: 4px; border: 1px solid rgba(0,255,136,.35); }
+    .doc-liens a:hover { background: rgba(0,255,136,.08); color: var(--vert); }
+
     footer { background: var(--bg2); border-top: 1px solid var(--bord); padding: 1.2rem 2rem; text-align: center; font-family: var(--mono); font-size: .68rem; color: var(--gris); position: relative; z-index: 1; }
     footer em { color: var(--vert); font-style: normal; }
 
@@ -150,6 +159,7 @@
     <li><a onclick="aller('accueil')"    id="nav-accueil"    class="actif">Accueil</a></li>
     <li><a onclick="aller('experience')" id="nav-experience"             >Expérience</a></li>
     <li><a onclick="aller('parcours')"   id="nav-parcours"               >Parcours</a></li>
+    <li><a onclick="aller('realisations')" id="nav-realisations"         >Réalisations</a></li>
     <li><a onclick="aller('loisirs')"    id="nav-loisirs"                >Loisirs</a></li>
     <li><a onclick="aller('contact')"    id="nav-contact"                >Contact</a></li>
   </ul>
@@ -237,7 +247,7 @@
       <h3> Patron — Boutique Leonidas Chocolats</h3>
       <div class="dates">Période dédiée · Saint-Nazaire</div>
       <p>Gérant d'une boutique de chocolats belges en franchise. Gestion commerciale, management, stocks et relation client.</p>
-      <div class="tags"><a href="https://www.leonidas.com/fr_fr/boutiques/saint-nazaire/leonidas" target="_blank" class="tag tag-orange">🍫 leonidas.com →</a></div>
+      <div class="tags"><a href="https://www.leonidas.com/fr_fr/boutiques/saint-nazaire/leonidas" target="_blank" class="tag tag-orange">leonidas.com →</a></div>
     </div>
 
     <div class="carte">
@@ -332,7 +342,89 @@
   </div>
 </section>
 
-<!-- PAGE 4 — LOISIRS -->
+<!-- PAGE 4 — RÉALISATIONS (photo et documents) -->
+<section class="page" id="page-realisations">
+  <div class="wrap">
+    <h1>Mes <em>réalisations</em></h1>
+    <p class="sous">Travaux pratiques, documentation technique et dossier BTS SIO SISR</p>
+
+    <h2>Sur le terrain</h2>
+    <figure class="photo">
+      <img src="images/baie-reseau.jpg" alt="Baie de brassage réseau avec switchs Cisco, panneaux de brassage et fibre optique" loading="lazy" />
+      <figcaption><strong>// baie réseau :</strong> brassage, switchs Cisco et liaisons fibre optique — découverte d'une infrastructure réelle en alternance.</figcaption>
+    </figure>
+
+    <h2>Documentation technique</h2>
+
+    <div class="carte">
+      <h3>Configuration d'un switch Cisco 2960</h3>
+      <div class="dates">Travaux pratiques · Réseau</div>
+      <p>Découverte d'un switch combo (ports Ethernet / fibre), remise en configuration usine, connexion console (port COM), commandes de base, création de VLAN et adressage IP.</p>
+      <div class="tags">
+        <span class="tag">Cisco 2960</span>
+        <span class="tag">VLAN</span>
+        <span class="tag">Console</span>
+        <span class="tag tag-bleu">Fibre optique</span>
+      </div>
+      <div class="doc-liens">
+        <a href="documents/configuration-switch-cisco-2960.pdf" target="_blank">Voir le PDF →</a>
+        <a href="documents/configuration-switch-cisco-2960.odt" download>Original .odt</a>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h3>Installation des postes diffuseurs PowerPoint</h3>
+      <div class="dates">Alternance · Systèmes</div>
+      <p>Procédure d'installation de postes d'affichage : compte en ouverture de session automatique, renommage et intégration au domaine, installation de Playzilla et d'Innes Screen Composer, paramétrage des machines (adresses MAC et IP).</p>
+      <div class="tags">
+        <span class="tag">Windows</span>
+        <span class="tag">Domaine</span>
+        <span class="tag">Autologon</span>
+        <span class="tag tag-bleu">NAS</span>
+      </div>
+      <div class="doc-liens">
+        <a href="documents/installation-diffuseurs-powerpoint.pdf" target="_blank">Voir le PDF →</a>
+        <a href="documents/installation-diffuseurs-powerpoint.docx" download>Original .docx</a>
+      </div>
+    </div>
+
+    <div class="carte">
+      <h3>Documentation technique du portfolio</h3>
+      <div class="dates">Projet personnel · Web</div>
+      <p>Création de ce portfolio, publication sur GitHub Pages, puis hébergement d'un site WordPress sur un serveur personnel YunoHost (Linux) : ouverture de port sur la box, transfert des fichiers et test d'accès depuis l'extérieur.</p>
+      <div class="tags">
+        <span class="tag">HTML / CSS</span>
+        <span class="tag">GitHub Pages</span>
+        <span class="tag">YunoHost</span>
+        <span class="tag tag-orange">WordPress</span>
+      </div>
+      <div class="doc-liens">
+        <a href="documents/doc-technique-portfolio.pdf" target="_blank">Voir le PDF →</a>
+        <a href="documents/doc-technique-portfolio.odt" download>Original .odt</a>
+      </div>
+    </div>
+
+    <h2>Dossier BTS SIO SISR</h2>
+
+    <a href="documents/cahier-des-charges-bts-sio-sisr.pdf" target="_blank" class="lien-ext">
+      <span class="icone"></span>
+      <div><strong>Cahier des charges BTS SIO SISR</strong><span>Infrastructure réseau, serveurs, sécurité, sauvegarde — PDF</span></div>
+      <span class="fl">→</span>
+    </a>
+    <a href="documents/controle-environnement-technologique.pdf" target="_blank" class="lien-ext">
+      <span class="icone"></span>
+      <div><strong>Contrôle de l'environnement technologique</strong><span>Épreuve E5 · Annexe 10-A — PDF</span></div>
+      <span class="fl">→</span>
+    </a>
+    <a href="documents/fiche-realisation-professionnelle.pdf" target="_blank" class="lien-ext">
+      <span class="icone"></span>
+      <div><strong>Fiche descriptive de réalisation professionnelle</strong><span>Épreuve E5 · Annexe 9-1-A — PDF</span></div>
+      <span class="fl">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- PAGE 5 — LOISIRS -->
 <section class="page" id="page-loisirs">
   <div class="wrap">
     <h1>Mes <em>loisirs</em></h1>
@@ -357,7 +449,7 @@
   </div>
 </section>
 
-<!-- PAGE 5 — CONTACT -->
+<!-- PAGE 6 — CONTACT -->
 <section class="page" id="page-contact">
   <div class="wrap">
     <h1>Me <em>contacter</em></h1>
